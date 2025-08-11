@@ -1,16 +1,27 @@
-
 package entidades;
 
 import java.time.LocalDate;
 
-public class Diretor extends Pessoa{
+public class Diretor extends Pessoa {
 
-    public Diretor(String nome, LocalDate nascimento, String nacionalidade) {
-        super (nome, nascimento, nacionalidade);
+    private int numeroDeFilmesDirigidos;
+
+    public Diretor(String nome, LocalDate nascimento, String biografia, int numeroDeFilmesDirigidos) {
+        super(nome, nascimento, biografia);
+        this.numeroDeFilmesDirigidos = numeroDeFilmesDirigidos;
     }
-    @Override
 
-    public String toString () {
-        return "Diretor: " + super.toString();
+    public int getNumeroDeFilmesDirigidos() {
+        return numeroDeFilmesDirigidos;
+    }
+
+    @Override
+    public String toString() {
+        return "Diretor: " + nome;
+    }
+
+    @Override
+    public String exibirDetalhes() {
+        return super.exibirDetalhes() + "\nNúmero de filmes dirigidos: " + numeroDeFilmesDirigidos;
     }
 }

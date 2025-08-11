@@ -1,13 +1,27 @@
-
 package entidades;
 
 import java.time.LocalDate;
 
 public class Ator extends Pessoa {
-    public Ator(String nome, LocalDate nascimento, String nacionalidade) {
-        super(nome, nascimento, nacionalidade);
+
+    private String papelFamoso;
+
+    public Ator(String nome, LocalDate nascimento, String biografia, String papelFamoso) {
+        super(nome, nascimento, biografia);
+        this.papelFamoso = papelFamoso;
     }
+
+    public String getPapelFamoso() {
+        return papelFamoso;
+    }
+
     @Override
-    public String toString() { return "Ator: " + super.toString();
+    public String toString() {
+        return "Ator: " + nome;
+    }
+
+    @Override
+    public String exibirDetalhes() {
+        return super.exibirDetalhes() + "\nPapel famoso: " + papelFamoso;
     }
 }

@@ -1,80 +1,51 @@
-//Tamili
 package entidades;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Filme {
-    private String titulo;
-    private LocalDate dataLancamento;
-    private double orcamento;
-    private String descricao;
-    private Diretor diretor;
-    private List<Ator> atores;
 
-    public Filme(String titulo, LocalDate dataLancamento, double orcamento, String descricao) {
+    private String titulo;
+    private int ano;
+    private Diretor diretor;
+    private List<Ator> elenco;
+
+    public Filme(String titulo, int ano, Diretor diretor, List<Ator> elenco) {
         this.titulo = titulo;
-        this.dataLancamento = dataLancamento;
-        this.orcamento = orcamento;
-        this.descricao = descricao;
-        this.atores = new ArrayList<>();
+        this.ano = ano;
+        this.diretor = diretor;
+        this.elenco = elenco;
     }
 
     public String getTitulo() {
         return titulo;
     }
 
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
-    }
-
-    public LocalDate getDataLancamento() {
-        return dataLancamento;
-    }
-
-    public void setDataLancamento(LocalDate dataLancamento) {
-        this.dataLancamento = dataLancamento;
-    }
-
-    public double getOrcamento() {
-        return orcamento;
-    }
-
-    public void setOrcamento(double orcamento) {
-        this.orcamento = orcamento;
-    }
-
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public int getAno() {
+        return ano;
     }
 
     public Diretor getDiretor() {
         return diretor;
     }
 
-    public void setDiretor(Diretor diretor) {
-        this.diretor = diretor;
+    public List<Ator> getElenco() {
+        return elenco;
     }
 
-    public List<Ator> getAtores() {
-        return atores;
-    }
-
-    public void adicionarAtor(Ator ator) {
-        atores.add(ator);
-    }
-
-    public void removerAtor(Ator ator) {
-        atores.remove(ator);
+    public String exibirDetalhes() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Título: ").append(titulo).append("\n");
+        sb.append("Ano: ").append(ano).append("\n");
+        sb.append("Diretor: ").append(diretor.getNome()).append("\n");
+        sb.append("Elenco:\n");
+        for (Ator ator : elenco) {
+            sb.append(" - ").append(ator.getNome()).append("\n");
+        }
+        return sb.toString();
     }
 
     @Override
     public String toString() {
-        return " Filme: " + titulo + " (" + dataLancamento.getYear() + ") \n ";
+        return titulo + " (" + ano + ")";
     }
 }
