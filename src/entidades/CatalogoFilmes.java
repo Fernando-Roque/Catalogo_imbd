@@ -44,4 +44,13 @@ public class CatalogoFilmes {
     public List<Filme> listarFilmes() {
         return filmes;
     }
+
+
+    public List<Ator> listarAtores() {
+        return atores;
+    }
+
+    public List<Diretor> listarDiretores() {
+        return diretores;
+    }
 }

@@ -4,6 +4,9 @@ package entidades;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.text.NumberFormat;
+import java.util.Locale;
+import java.time.format.DateTimeFormatter;
 
 public class Filme {
     private String titulo;
@@ -74,7 +77,39 @@ public class Filme {
     }
 
     @Override
+
+
     public String toString() {
-        return " Filme: " + titulo + " (" + dataLancamento.getYear() + ") \n ";
+        DateTimeFormatter DATA = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String dataFmt = (dataLancamento != null) ? dataLancamento.format(DATA) : "—";
+
+        // Orçamento em USD
+        NumberFormat nf = NumberFormat.getCurrencyInstance(Locale.US);
+        String orcamentoFmt = nf.format(this.orcamento);
+
+        // Diretor
+        String nomeDiretor = (diretor != null) ? diretor.getNome() : "(sem diretor)";
+
+        // Atores
+        StringBuilder elenco = new StringBuilder();
+        if (atores == null || atores.isEmpty()) {
+            elenco.append("(sem elenco)");
+        } else {
+            for (int i = 0; i < atores.size(); i++) {
+                elenco.append(atores.get(i).getNome());
+                if (i < atores.size() - 1) elenco.append(", ");
+            }
+        }
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("Filme: ").append(titulo != null ? titulo : "—")
+                .append(" (").append(dataLancamento != null ? dataLancamento.getYear() : "____").append(")")
+                .append("\nDiretor: ").append(nomeDiretor)
+                .append("\nAtores: ").append(elenco)
+                .append("\nLançamento: ").append(dataFmt)
+                .append("\nOrçamento: ").append(orcamentoFmt)
+                .append("\nDescrição: ").append(descricao != null ? descricao : "____")
+                .append("\n");
+        return sb.toString();
     }
 }
