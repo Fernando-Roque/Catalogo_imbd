@@ -3,11 +3,11 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
 
-import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatter; // DateTimeFormatter é usado para formatar e analisar objetos de data e hora
 
    public class Main {
-           private static final DateTimeFormatter DATA = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-
+           // ofPattern("dd/MM/yyyy")é usado para criar um formatador de data e hora com base em um padrão especificado
+           private static final DateTimeFormatter DATA = DateTimeFormatter.ofPattern("dd/MM/yyyy"); 
            public static void main(String[] args) {
 
                    Scanner scanner = new Scanner(System.in); // Scanner para entrada de dados do usuário
@@ -108,9 +108,9 @@ import java.time.format.DateTimeFormatter;
                                    }
                                    case "2": {
                                            System.out.print("\nDigite o nome (ou parte) do filme: ");
-                                           String pesquisa = scanner.nextLine().trim();
+                                           String pesquisa = scanner.nextLine().trim().toLowerCase(); // toLowerCase para facilitar a busca e .trim() para ignorar  espaços 
                                            List<Filme> resultados = catalogo.pesquisarFilmePorNome(pesquisa);
-                                           if (resultados.isEmpty()) {
+                                           if (resultados.isEmpty()) { //isEmpty verifica se a lista está vazia retorna true
                                                    System.out.println("Nenhum filme encontrado com esse nome.");
                                            } else {
                                                    System.out.println("\nFilmes encontrados:");
@@ -175,7 +175,7 @@ import java.time.format.DateTimeFormatter;
 
                                            System.out.print("Nascimento (dd/MM/yyyy): ");
                                            String dataStr = scanner.nextLine().trim();
-                                           LocalDate nascimento = LocalDate.parse(dataStr, DATA);
+                                           LocalDate nascimento = LocalDate.parse(dataStr, DATA); // Parse converte a string em LocalDate usando o formatador DATA 
 
                                            System.out.print("Nacionalidade: ");
                                            String nacionalidade = scanner.nextLine().trim();
@@ -224,7 +224,7 @@ import java.time.format.DateTimeFormatter;
                                            String titulo = scanner.nextLine().trim();
                                            System.out.print("Nome do diretor: ");
                                            String nomeDiretor = scanner.nextLine().trim();
-
+                                           // equalsIgnoreCase() é um método da classe String usado para comparar duas strings, ignorando a diferença entre maiúsculas e minúsculas.equalsIgnoreCase() é um método da classe String usado para comparar duas strings, ignorando a diferença entre maiúsculas e minúsculas.
                                            Filme filmeEscolhido = null;
                                            for (Filme filmeLista : catalogo.listarFilmes()) {
                                                    if (filmeLista.getTitulo().equalsIgnoreCase(titulo)) {
