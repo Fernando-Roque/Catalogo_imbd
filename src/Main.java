@@ -1,9 +1,8 @@
-
-
 import entidades.*;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
+
 import java.time.format.DateTimeFormatter;
 
    public class Main {
@@ -260,3 +259,5 @@ import java.time.format.DateTimeFormatter;
                    }
            }
    }
+
+
