@@ -3,7 +3,6 @@ package entidades;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Objects;
 
 public abstract class Pessoa
 //superclass de Atores e Diretores ( Têm em comum em outras classes)
