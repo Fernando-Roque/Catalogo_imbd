@@ -44,4 +44,4 @@ O projeto será desenvolvido em grupos de até 4 integrantes, a entrega será fe
 
 3. [Marcela](https://github.com/MDrovetto)
 
-4. [Tamilli](https://github.com/thamilyr)
+4. [Thamily](https://github.com/thamilyr)
