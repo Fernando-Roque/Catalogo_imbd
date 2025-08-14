@@ -1,8 +1,13 @@
-import entidades.*;
+//  branch fernando 
+
+import entidades.Ator; // Importando a classe Ator do pacote entidades
+import entidades.CatalogoFilmes; // Importando a classe CatalogoFilmes do pacote entidades
+import entidades.Diretor; // Importando a classe Diretor do pacote entidades
+import entidades.Filme; // Importando a classe Filme do pacote entidades
 import java.time.LocalDate;
 import java.util.List;
+//import java.util.ArrayList;
 import java.util.Scanner;
-
 import java.time.format.DateTimeFormatter; // DateTimeFormatter é usado para formatar e analisar objetos de data e hora
 
    public class Main {
@@ -87,18 +92,21 @@ import java.time.format.DateTimeFormatter; // DateTimeFormatter é usado para fo
                    while (true) {
                            System.out.println("\nCatálogo de Filmes");
                            System.out.println("1- Listar todos os filmes");
-                           System.out.println("2- Pesquisar filme por nome");
-                           System.out.println("3- Cadastrar filme");
-                           System.out.println("4- Cadastrar ator");
-                           System.out.println("5- Cadastrar diretor");
-                           System.out.println("6- Associar ator a filme");
-                           System.out.println("7- Associar diretor a filme");
-                           System.out.println("8- Sair");
+                           System.out.println("2- Listar todos os atores");
+                           System.out.println("3- Listar todos os diretores");
+                           System.out.println("4- Pesquisar filme por nome");
+                           System.out.println("5- Cadastrar filme");
+                           System.out.println("6- Cadastrar ator");
+                           System.out.println("7- Cadastrar diretor");
+                           System.out.println("8- Associar ator a filme");
+                           System.out.println("9- Associar diretor a filme");
+                           System.out.println("10- Sair");
                            System.out.print("Digite a opção desejada: ");
 
                            String op = scanner.nextLine().trim();
 
                            switch (op) {
+                                   // listar filmes
                                    case "1": {
                                            System.out.println("\nFilmes cadastrados");
                                            for (Filme filmeLista : catalogo.listarFilmes()) {
@@ -106,7 +114,24 @@ import java.time.format.DateTimeFormatter; // DateTimeFormatter é usado para fo
                                            }
                                            break;
                                    }
+                                   // listar Atores
                                    case "2": {
+                                         System.out.println("\nAtores cadastrados");
+                                           for (Ator atorLista : catalogo.listarAtores()) {
+                                                   System.out.print(atorLista); // toString() do Ator
+                                           }
+                                        break;
+                                   }
+                                   // listar Diretores
+                                  case "3": {
+                                          System.out.println("\nDiretores cadastrados");
+                                           for (Diretor diretorLista : catalogo.listarDiretores()) {
+                                                   System.out.print(diretorLista); // toString() do Ator
+                                           }
+                                        break;
+                                    } 
+                                    // Pesquisar filme por nome    
+                                   case "4": {
                                            System.out.print("\nDigite o nome (ou parte) do filme: ");
                                            String pesquisa = scanner.nextLine().trim().toLowerCase(); // toLowerCase para facilitar a busca e .trim() para ignorar  espaços 
                                            List<Filme> resultados = catalogo.pesquisarFilmePorNome(pesquisa);
@@ -122,7 +147,7 @@ import java.time.format.DateTimeFormatter; // DateTimeFormatter é usado para fo
                                    }
 
                                    // Cadastrar filme
-                                   case "3": {
+                                   case "5": {
                                            try {
 
                                            System.out.print("Título: ");
@@ -137,9 +162,13 @@ import java.time.format.DateTimeFormatter; // DateTimeFormatter é usado para fo
 
                                            System.out.print("Descrição: ");
                                            String descricao = scanner.nextLine().trim();
-
-                                           catalogo.cadastrarFilme(new Filme(titulo, data, orcamento, descricao));
-                                           System.out.println("Filme cadastrado.");
+                                           Filme novoFilme = new Filme(titulo, data, orcamento, descricao);
+                                           if (!catalogo.pesquisarFilmePorNome(novoFilme.getTitulo()).isEmpty()) { // Verifica se o filme já existe no catálogo
+                                                System.out.println("Filme já cadastrado.");
+                                           }else {
+                                                   catalogo.cadastrarFilme(novoFilme);
+                                                   System.out.println("Filme cadastrado.");
+                                           }
                                            }
                                            catch (Exception invalido) {
                                                    System.out.println("Inválido. Formato da data ==> dd/MM/yyyy e número no orçamento.");
@@ -147,7 +176,7 @@ import java.time.format.DateTimeFormatter; // DateTimeFormatter é usado para fo
                                            break;
                                    }
                                    // Cadastrar ator
-                                   case "4": {
+                                   case "6": {
                                           try {
                                            System.out.print("Nome do ator: ");
                                            String nome = scanner.nextLine().trim();
@@ -158,8 +187,8 @@ import java.time.format.DateTimeFormatter; // DateTimeFormatter é usado para fo
 
                                            System.out.print("Nacionalidade: ");
                                            String nacionalidade = scanner.nextLine().trim();
-
-                                           catalogo.cadastrarAtor(new Ator(nome, nascimento, nacionalidade));
+                                           Ator novoAtor = new Ator(nome, nascimento, nacionalidade);
+                                           catalogo.cadastrarAtor(novoAtor);
                                            System.out.println("Ator cadastrado.");
                                           }
                                               catch (Exception invalido) {
@@ -168,7 +197,7 @@ import java.time.format.DateTimeFormatter; // DateTimeFormatter é usado para fo
                                            break;
                                    }
                                    // Cadastrar diretor
-                                   case "5": {
+                                   case "7": {
                                            try {
                                            System.out.print("Nome do diretor: ");
                                            String nome = scanner.nextLine().trim();
@@ -179,8 +208,8 @@ import java.time.format.DateTimeFormatter; // DateTimeFormatter é usado para fo
 
                                            System.out.print("Nacionalidade: ");
                                            String nacionalidade = scanner.nextLine().trim();
-
-                                           catalogo.cadastrarDiretor(new Diretor(nome, nascimento, nacionalidade));
+                                           Diretor novoDiretor = new Diretor(nome, nascimento, nacionalidade);
+                                           catalogo.cadastrarDiretor(novoDiretor);
                                            System.out.println("Diretor cadastrado.");
                                            }
                                            catch (Exception invalido) {
@@ -188,7 +217,7 @@ import java.time.format.DateTimeFormatter; // DateTimeFormatter é usado para fo
                                            }
                                            break;
                                    }
-                                   case "6": {
+                                   case "8": {
                                            // Associar ator a filme
                                            System.out.print("Título do filme: ");
                                            String titulo = scanner.nextLine().trim();
@@ -218,7 +247,7 @@ import java.time.format.DateTimeFormatter; // DateTimeFormatter é usado para fo
                                            }
                                            break;
                                    }
-                                   case "7": {
+                                   case "9": {
                                            // Associar diretor a filme
                                            System.out.print("Título do filme: ");
                                            String titulo = scanner.nextLine().trim();
@@ -248,7 +277,7 @@ import java.time.format.DateTimeFormatter; // DateTimeFormatter é usado para fo
                                            }
                                            break;
                                    }
-                                   case "8":
+                                   case "10":
                                            System.out.println("Volte sempre!");
                                            scanner.close();
                                            return;

@@ -25,6 +25,7 @@ O projeto será desenvolvido em grupos de até 4 integrantes, a entrega será fe
 
 - **[ ]** Anexar comentários que ajudem a explicar o código.
 - **[ ]** Implementar as funcionalidades de Excluir (Filme, Ator e Diretor).
+- **[ ]** Verificar a função cadastrar Filmes, atores e Diretores.
 - **[ ]** Montar a Apresentação do projeto.
 - **[ ]** Estilizar as saídas do Usuário.
 - **[ ]** Achar e corrigir possíveis erros.

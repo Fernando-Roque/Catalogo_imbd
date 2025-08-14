@@ -37,7 +37,7 @@ public abstract class Pessoa
     // Override pra sobrescrever o toString que vêm da classe objeto (nativa do java)
     @Override
     public String toString() {
-        return nome + " (" + nacionalidade + ")";
+        return nome + " (" + nacionalidade + ")" + "\n";
     }
 
     public String exibirDetalhes() {
