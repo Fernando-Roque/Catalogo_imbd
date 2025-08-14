@@ -1,5 +1,11 @@
+// branch fernando 
+
 //Tamili
 package entidades;
+
+import entidades.Ator;
+import entidades.Diretor;
+import entidades.Filme; 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -42,15 +48,13 @@ public class CatalogoFilmes {
     }
 
     public List<Filme> listarFilmes() {
-        return filmes;
+        return this.filmes;
     }
-
-
     public List<Ator> listarAtores() {
-        return atores;
+        return this.atores;
     }
 
     public List<Diretor> listarDiretores() {
-        return diretores;
+        return this.diretores;
     }
 }
