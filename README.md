@@ -23,15 +23,15 @@ O projeto será desenvolvido em grupos de até 4 integrantes, a entrega será fe
 
 <h2 align="left" style="font-weight: bold;">🔧  Tarefas Pendentes: 👩‍🔧 👨‍🔧</h2>
 
-- **[ ]** Anexar comentários que ajude a explicar o código.
-- **[ ]** Implemantar a funcionalide de Excluir (Filme,Ator e Dretor)
+- **[ ]** Anexar comentários que ajudem a explicar o código.
+- **[ ]** Implementar as funcionalidades de Excluir (Filme, Ator e Diretor).
 - **[ ]** Montar a Apresentação do projeto.
-- **[ ]** Estilizar as saidas do Usuário.
-- **[ ]** Achar e corrigir possiveis erros.
+- **[ ]** Estilizar as saídas do Usuário.
+- **[ ]** Achar e corrigir possíveis erros.
 
 <h2 align="left" style="font-weight: bold;">📫 Executar o projeto </h2>
 
-- Em Sistemas Mac é Linux: garanta estar com o terminal aberto na pasta do arquivo `Main.java`, após execute `javac Main.java` em seguida `java Main`.
+- Em sistema Mac é Linux: garanta estar com o terminal aberto na pasta do arquivo `Main.java`, após execute `javac Main.java` em seguida `java Main`.
 
 - Em Sistemas Windons: Abra o CMD ou o Bash garanta estar na pasta do arquivo `Main.java`, após execute `javac Main.java` em seguida `java Main`.
 
