@@ -110,7 +110,7 @@ import java.time.format.DateTimeFormatter; // DateTimeFormatter é usado para fo
                                    case "1": {
                                            System.out.println("\nFilmes cadastrados");
                                            for (Filme filmeLista : catalogo.listarFilmes()) {
-                                                   System.out.print(filmeLista); // toString() do Filme
+                                                   System.out.println(filmeLista); // toString() do Filme
                                            }
                                            break;
                                    }
@@ -118,7 +118,7 @@ import java.time.format.DateTimeFormatter; // DateTimeFormatter é usado para fo
                                    case "2": {
                                          System.out.println("\nAtores cadastrados");
                                            for (Ator atorLista : catalogo.listarAtores()) {
-                                                   System.out.print(atorLista); // toString() do Ator
+                                                   System.out.println(atorLista); // toString() do Ator
                                            }
                                         break;
                                    }
@@ -126,7 +126,7 @@ import java.time.format.DateTimeFormatter; // DateTimeFormatter é usado para fo
                                   case "3": {
                                           System.out.println("\nDiretores cadastrados");
                                            for (Diretor diretorLista : catalogo.listarDiretores()) {
-                                                   System.out.print(diretorLista); // toString() do Ator
+                                                   System.out.println(diretorLista); // toString() do Ator
                                            }
                                         break;
                                     } 
@@ -147,76 +147,131 @@ import java.time.format.DateTimeFormatter; // DateTimeFormatter é usado para fo
                                    }
 
                                    // Cadastrar filme
-                                   case "5": {
-                                           try {
+                               case "5": {
+                                   System.out.print("Título: ");
+                                   String titulo = scanner.nextLine().trim();
 
-                                           System.out.print("Título: ");
-                                           String titulo = scanner.nextLine().trim();
-
-                                           System.out.print("Data de lançamento (dd/MM/yyyy): ");
-                                           String dataStr = scanner.nextLine().trim();
-                                           LocalDate data = LocalDate.parse(dataStr, DATA);
-
-                                           System.out.print("Orçamento (USD): ");
-                                           double orcamento = Double.parseDouble(scanner.nextLine().trim());
-
-                                           System.out.print("Descrição: ");
-                                           String descricao = scanner.nextLine().trim();
-                                           Filme novoFilme = new Filme(titulo, data, orcamento, descricao);
-                                           if (!catalogo.pesquisarFilmePorNome(novoFilme.getTitulo()).isEmpty()) { // Verifica se o filme já existe no catálogo
-                                                System.out.println("Filme já cadastrado.");
-                                           }else {
-                                                   catalogo.cadastrarFilme(novoFilme);
-                                                   System.out.println("Filme cadastrado.");
-                                           }
-                                           }
-                                           catch (Exception invalido) {
-                                                   System.out.println("Inválido. Formato da data ==> dd/MM/yyyy e número no orçamento.");
-                                           }
-                                           break;
+                                   if (!catalogo.pesquisarFilmePorNome(titulo).isEmpty()) {
+                                       System.out.println("Filme já cadastrado.");
+                                       break;
                                    }
-                                   // Cadastrar ator
-                                   case "6": {
-                                          try {
-                                           System.out.print("Nome do ator: ");
-                                           String nome = scanner.nextLine().trim();
 
-                                           System.out.print("Nascimento (dd/MM/yyyy): ");
-                                           String dataStr = scanner.nextLine().trim();
-                                           LocalDate nascimento = LocalDate.parse(dataStr, DATA);
-
-                                           System.out.print("Nacionalidade: ");
-                                           String nacionalidade = scanner.nextLine().trim();
-                                           Ator novoAtor = new Ator(nome, nascimento, nacionalidade);
-                                           catalogo.cadastrarAtor(novoAtor);
-                                           System.out.println("Ator cadastrado.");
-                                          }
-                                              catch (Exception invalido) {
-                                                          System.out.println("Inválido. Formato da data ==> dd/MM/yyyy");
-                                                  }
-                                           break;
+                                   LocalDate data; // Variável declarada antes do loop
+                                   while (true) {
+                                       System.out.print("Data de lançamento (dd/MM/yyyy): ");
+                                       String dataStr = scanner.nextLine().trim();
+                                       try {
+                                           data = LocalDate.parse(dataStr, DATA);
+                                           break; // Sai do loop se a data for válida
+                                       } catch (java.time.format.DateTimeParseException e) {
+                                           System.out.println("Formato de data inválido. Por favor, use o formato dd/MM/yyyy.");
+                                       }
                                    }
-                                   // Cadastrar diretor
-                                   case "7": {
-                                           try {
-                                           System.out.print("Nome do diretor: ");
-                                           String nome = scanner.nextLine().trim();
 
-                                           System.out.print("Nascimento (dd/MM/yyyy): ");
-                                           String dataStr = scanner.nextLine().trim();
-                                           LocalDate nascimento = LocalDate.parse(dataStr, DATA); // Parse converte a string em LocalDate usando o formatador DATA 
-
-                                           System.out.print("Nacionalidade: ");
-                                           String nacionalidade = scanner.nextLine().trim();
-                                           Diretor novoDiretor = new Diretor(nome, nascimento, nacionalidade);
-                                           catalogo.cadastrarDiretor(novoDiretor);
-                                           System.out.println("Diretor cadastrado.");
-                                           }
-                                           catch (Exception invalido) {
-                                                   System.out.println("Inválido. Formato da data ==> dd/MM/yyyy");
-                                           }
+                                   double orcamento;
+                                   while (true) {
+                                       System.out.print("Orçamento (USD): ");
+                                       String orcamentoStr = scanner.nextLine().trim();
+                                       try {
+                                           orcamento = Double.parseDouble(orcamentoStr);
                                            break;
+                                       } catch (NumberFormatException e) {
+                                           System.out.println("Valor inválido. Por favor, digite apenas números para o orçamento.");
+                                       }
                                    }
+
+                                   System.out.print("Descrição: ");
+                                   String descricao = scanner.nextLine().trim();
+
+                                   Filme novoFilme = new Filme(titulo, data, orcamento, descricao);
+                                   catalogo.cadastrarFilme(novoFilme);
+                                   System.out.println("Filme cadastrado.");
+                                   break;
+                               }
+                               // Cadastrar ator
+                               case "6": {
+                                   String nome;
+                                   while (true) { // Inicia o loop para validar o nome
+                                       System.out.print("Nome do ator: ");
+                                       nome = scanner.nextLine().trim();
+                                       // Verifica se o campo não está vazio e se contém pelo menos uma letra
+                                       if (!nome.isEmpty() && nome.matches(".*[a-zA-Z]+.*")) {
+                                           break; // Sai do loop se o nome for válido
+                                       } else {
+                                           System.out.println("Nome inválido. O campo não pode ser vazio ou conter apenas números.");
+                                       }
+                                   }
+
+                                   LocalDate nascimento;
+                                   while (true) {
+                                       System.out.print("Nascimento (dd/MM/yyyy): ");
+                                       String dataStr = scanner.nextLine().trim();
+                                       try {
+                                           nascimento = LocalDate.parse(dataStr, DATA);
+                                           break;
+                                       } catch (java.time.format.DateTimeParseException e) {
+                                           System.out.println("Formato de data inválido. Por favor, use o formato dd/MM/yyyy.");
+                                       }
+                                   }
+
+                                   String nacionalidade;
+                                   while (true) {
+                                       System.out.print("Nacionalidade: ");
+                                       nacionalidade = scanner.nextLine().trim();
+                                       if (!nacionalidade.isEmpty() && nacionalidade.matches(".*[a-zA-Z]+.*")) {
+                                           break;
+                                       } else {
+                                           System.out.println("Nacionalidade inválida. O campo não pode ser vazio ou conter apenas números.");
+                                       }
+                                   }
+
+                                   Ator novoAtor = new Ator(nome, nascimento, nacionalidade);
+                                   catalogo.cadastrarAtor(novoAtor);
+                                   System.out.println("Ator cadastrado.");
+                                   break;
+                               }
+                               // Cadastrar diretor
+                               case "7": {
+                                   String nome;
+                                   while (true) { // Inicia o loop para validar o nome
+                                       System.out.print("Nome do diretor: ");
+                                       nome = scanner.nextLine().trim();
+                                       // Verifica se o campo não está vazio e se contém pelo menos uma letra
+                                       if (!nome.isEmpty() && nome.matches(".*[a-zA-Z]+.*")) {
+                                           break; // Sai do loop se o nome for válido
+                                       } else {
+                                           System.out.println("Nome inválido. O campo não pode ser vazio ou conter apenas números.");
+                                       }
+                                   }
+
+                                   LocalDate nascimento;
+                                   while (true) {
+                                       System.out.print("Nascimento (dd/MM/yyyy): ");
+                                       String dataStr = scanner.nextLine().trim();
+                                       try {
+                                           nascimento = LocalDate.parse(dataStr, DATA);
+                                           break;
+                                       } catch (java.time.format.DateTimeParseException e) {
+                                           System.out.println("Formato de data inválido. Por favor, use o formato dd/MM/yyyy.");
+                                       }
+                                   }
+
+                                   String nacionalidade;
+                                   while (true) {
+                                       System.out.print("Nacionalidade: ");
+                                       nacionalidade = scanner.nextLine().trim();
+                                       if (!nacionalidade.isEmpty() && nacionalidade.matches(".*[a-zA-Z]+.*")) {
+                                           break;
+                                       } else {
+                                           System.out.println("Nacionalidade inválida. O campo não pode ser vazio ou conter apenas números.");
+                                       }
+                                   }
+
+                                   Diretor novoDiretor = new Diretor(nome, nascimento, nacionalidade);
+                                   catalogo.cadastrarDiretor(novoDiretor);
+                                   System.out.println("Diretor cadastrado.");
+                                   break;
+                               }
                                    case "8": {
                                            // Associar ator a filme
                                            System.out.print("Título do filme: ");
