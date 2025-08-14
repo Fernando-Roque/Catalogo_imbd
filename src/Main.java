@@ -272,76 +272,137 @@ import java.time.format.DateTimeFormatter; // DateTimeFormatter é usado para fo
                                    System.out.println("Diretor cadastrado.");
                                    break;
                                }
+                               // Associar ator a filme
                                    case "8": {
-                                           // Associar ator a filme
-                                           System.out.print("Título do filme: ");
-                                           String titulo = scanner.nextLine().trim();
-                                           System.out.print("Nome do ator: ");
-                                           String nomeAtor = scanner.nextLine().trim();
-
-                                           Filme filmeEscolhido = null;
-                                           for (Filme filmeLista : catalogo.listarFilmes()) {
-                                                   if (filmeLista.getTitulo().equalsIgnoreCase(titulo)) {
-                                                           filmeEscolhido = filmeLista;
-                                                           break;
-                                                   }
-                                           }
-                                           Ator atorEscolhido = null;
-                                           for (Ator a: catalogo.listarAtores()) {
-                                                   if (a.getNome().equalsIgnoreCase(nomeAtor)) {
-                                                           atorEscolhido = a;
-                                                           break;
-                                                   }
-                                           }
-                                           // Fime escolhido ou Ator Escolhido
-                                           if (filmeEscolhido == null || atorEscolhido == null) {
-                                                   System.out.println("Filme ou ator não encontrado.");
-                                           } else {
-                                                   catalogo.associarAtorFilme(filmeEscolhido, atorEscolhido);
-                                                   System.out.println("Ator associado.");
-                                           }
+                                       // Listar filmes para seleção
+                                       List<Filme> filmes = catalogo.listarFilmes();
+                                       if (filmes.isEmpty()) {
+                                           System.out.println("Nenhum filme cadastrado para associar.");
                                            break;
+                                       }
+
+                                       System.out.println("\nEscolha um filme da lista:");
+                                       for (int i = 0; i < filmes.size(); i++) {
+                                           System.out.println((i + 1) + "- " + filmes.get(i).getTitulo());
+                                       }
+
+                                       Filme filmeEscolhido = null;
+                                       while (filmeEscolhido == null) {
+                                           System.out.print("Digite o número do filme: ");
+                                           try {
+                                               int filmeIndex = Integer.parseInt(scanner.nextLine()) - 1;
+                                               if (filmeIndex >= 0 && filmeIndex < filmes.size()) {
+                                                   filmeEscolhido = filmes.get(filmeIndex);
+                                               } else {
+                                                   System.out.println("Número inválido. Tente novamente.");
+                                               }
+                                           } catch (NumberFormatException e) {
+                                               System.out.println("Entrada inválida. Por favor, digite um número.");
+                                           }
+                                       }
+
+                                       // Listar atores para seleção
+                                       List<Ator> atores = catalogo.listarAtores();
+                                       if (atores.isEmpty()) {
+                                           System.out.println("Nenhum ator cadastrado para associar.");
+                                           break;
+                                       }
+
+                                       System.out.println("\nEscolha um ator da lista:");
+                                       for (int i = 0; i < atores.size(); i++) {
+                                           System.out.println((i + 1) + "- " + atores.get(i).getNome());
+                                       }
+
+                                       Ator atorEscolhido = null;
+                                       while (atorEscolhido == null) {
+                                           System.out.print("Digite o número do ator: ");
+                                           try {
+                                               int atorIndex = Integer.parseInt(scanner.nextLine()) - 1;
+                                               if (atorIndex >= 0 && atorIndex < atores.size()) {
+                                                   atorEscolhido = atores.get(atorIndex);
+                                               } else {
+                                                   System.out.println("Número inválido. Tente novamente.");
+                                               }
+                                           } catch (NumberFormatException e) {
+                                               System.out.println("Entrada inválida. Por favor, digite um número.");
+                                           }
+                                       }
+
+                                       // Associar e confirmar
+                                       catalogo.associarAtorFilme(filmeEscolhido, atorEscolhido);
+                                       System.out.println("Ator '" + atorEscolhido.getNome() + "' associado ao filme '" + filmeEscolhido.getTitulo() + "'.");
+                                       break;
                                    }
+                                   // Associar diretor a filme
                                    case "9": {
-                                           // Associar diretor a filme
-                                           System.out.print("Título do filme: ");
-                                           String titulo = scanner.nextLine().trim();
-                                           System.out.print("Nome do diretor: ");
-                                           String nomeDiretor = scanner.nextLine().trim();
-                                           // equalsIgnoreCase() é um método da classe String usado para comparar duas strings, ignorando a diferença entre maiúsculas e minúsculas.equalsIgnoreCase() é um método da classe String usado para comparar duas strings, ignorando a diferença entre maiúsculas e minúsculas.
-                                           Filme filmeEscolhido = null;
-                                           for (Filme filmeLista : catalogo.listarFilmes()) {
-                                                   if (filmeLista.getTitulo().equalsIgnoreCase(titulo)) {
-                                                           filmeEscolhido = filmeLista;
-                                                           break;
-                                                   }
-                                           }
-                                           Diretor diretorEscolhido = null;
-                                           for (Diretor d: catalogo.listarDiretores()) {
-                                                   if (d.getNome().equalsIgnoreCase(nomeDiretor)) {
-                                                           diretorEscolhido = d;
-                                                           break;
-                                                   }
-                                           }
-
-                                           if (filmeEscolhido == null || diretorEscolhido == null) {
-                                                   System.out.println("Filme ou diretor não encontrado.");
-                                           } else {
-                                                   catalogo.associarDiretorFilme(filmeEscolhido, diretorEscolhido);
-                                                   System.out.println("Diretor associado.");
-                                           }
+                                       // Listar filmes para seleção
+                                       List<Filme> filmes = catalogo.listarFilmes();
+                                       if (filmes.isEmpty()) {
+                                           System.out.println("Nenhum filme cadastrado para associar.");
                                            break;
-                                   }
-                                   case "10":
-                                           System.out.println("Volte sempre!");
-                                           scanner.close();
-                                           return;
+                                       }
 
+                                       System.out.println("\nEscolha um filme da lista:");
+                                       for (int i = 0; i < filmes.size(); i++) {
+                                           System.out.println((i + 1) + "- " + filmes.get(i).getTitulo());
+                                       }
+
+                                       Filme filmeEscolhido = null;
+                                       while (filmeEscolhido == null) {
+                                           System.out.print("Digite o número do filme: ");
+                                           try {
+                                               int filmeIndex = Integer.parseInt(scanner.nextLine()) - 1;
+                                               if (filmeIndex >= 0 && filmeIndex < filmes.size()) {
+                                                   filmeEscolhido = filmes.get(filmeIndex);
+                                               } else {
+                                                   System.out.println("Número inválido. Tente novamente.");
+                                               }
+                                           } catch (NumberFormatException e) {
+                                               System.out.println("Entrada inválida. Por favor, digite um número.");
+                                           }
+                                       }
+
+                                       // Listar diretores para seleção
+                                       List<Diretor> diretores = catalogo.listarDiretores();
+                                       if (diretores.isEmpty()) {
+                                           System.out.println("Nenhum diretor cadastrado para associar.");
+                                           break;
+                                       }
+
+                                       System.out.println("\nEscolha um diretor da lista:");
+                                       for (int i = 0; i < diretores.size(); i++) {
+                                           System.out.println((i + 1) + "- " + diretores.get(i).getNome());
+                                       }
+
+                                       Diretor diretorEscolhido = null;
+                                       while (diretorEscolhido == null) {
+                                           System.out.print("Digite o número do diretor: ");
+                                           try {
+                                               int diretorIndex = Integer.parseInt(scanner.nextLine()) - 1;
+                                               if (diretorIndex >= 0 && diretorIndex < diretores.size()) {
+                                                   diretorEscolhido = diretores.get(diretorIndex);
+                                               } else {
+                                                   System.out.println("Número inválido. Tente novamente.");
+                                               }
+                                           } catch (NumberFormatException e) {
+                                               System.out.println("Entrada inválida. Por favor, digite um número.");
+                                           }
+                                       }
+
+                                       // Associar e confirmar
+                                       catalogo.associarDiretorFilme(filmeEscolhido, diretorEscolhido);
+                                       System.out.println("Diretor '" + diretorEscolhido.getNome() + "' associado ao filme '" + filmeEscolhido.getTitulo() + "'.");
+                                       break;
+                                   }
+                                   // Sair do programa
+                                   case "10":
+                                       System.out.println("Volte sempre!");
+                                       scanner.close();
+                                       return;
                                    default:
-                                           System.out.println("Opção inválida!");
+                                       System.out.println("Opção inválida!");
+                                       break;
                            }
                    }
            }
    }
-
-
