@@ -140,7 +140,7 @@ import java.time.format.DateTimeFormatter; // DateTimeFormatter é usado para fo
                                            } else {
                                                    System.out.println("\nFilmes encontrados:");
                                                    for (Filme filmeLista : resultados) {
-                                                           System.out.print(filmeLista);
+                                                           System.out.println(filmeLista);
                                                    }
                                            }
                                            break;
